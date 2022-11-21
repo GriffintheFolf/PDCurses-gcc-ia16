@@ -453,7 +453,7 @@ void PDC_scr_close(void)
             (unsigned long)_FAR_POINTER(pdc_video_seg,
             pdc_video_ofs));
 #else
-# if (SMALL || MEDIUM)
+# if (SMALL || MEDIUM) && (!defined(__GNUC__) && !defined(__MSDOS__))
         segread(&segregs);
         ds = segregs.ds;
         movedata(ds, (int)saved_screen, pdc_video_seg, pdc_video_ofs,

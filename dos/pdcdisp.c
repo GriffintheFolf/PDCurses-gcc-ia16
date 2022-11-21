@@ -81,7 +81,7 @@ void _new_packet(attr_t attr, int lineno, int x, int len, const chtype *srcp)
                   (unsigned long)_FAR_POINTER(pdc_video_seg,
                   pdc_video_ofs + (lineno * curscr->_maxx + x) * 2));
 #else
-# if SMALL || MEDIUM
+# if (SMALL || MEDIUM) && (!defined(__GNUC__) && !defined(__MSDOS__))
         segread(&segregs);
         ds = segregs.ds;
         movedata(ds, (int)temp_line, pdc_video_seg,

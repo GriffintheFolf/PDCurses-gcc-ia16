@@ -29,11 +29,12 @@ else
 	LDFLAGS =
 endif
 
-CFLAGS += -I$(PDCURSES_SRCDIR)
+# -D_BORLANDC_SOURCE is needed with gcc-ia16 to get pdckbd.c to work
+CFLAGS += -I$(PDCURSES_SRCDIR) -D_BORLANDC_SOURCE
 
 LINK		= $(CC)
 
-LIBEXE		= ar
+LIBEXE		= ia16-elf-ar
 LIBFLAGS	= rcv
 
 LIBCURSES	= pdcurses.a

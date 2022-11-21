@@ -75,7 +75,11 @@ void setdosmembyte(int offs, unsigned char b);
 void setdosmemword(int offs, unsigned short w);
 #else
 # if SMALL || MEDIUM
-#  define PDC_FAR far
+#  if (defined(__GNUC__) && defined(__MSDOS__))
+#   define PDC_FAR __far
+#  else
+#   define PDC_FAR far
+#  endif
 # else
 #  define PDC_FAR
 # endif

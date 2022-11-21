@@ -22,15 +22,15 @@ PDCURSES_DOS_H	= $(osdir)/pdcdos.h
 CC		= ia16-elf-gcc
 
 ifeq ($(DEBUG),Y)
-	CFLAGS  = -g -Wall -DPDCDEBUG
+	CC_CFLAGS  = -g -Wall -DPDCDEBUG
 	LDFLAGS = -g
 else
-	CFLAGS  = -O2 -Wall
+	CC_CFLAGS  = -Os -Wall
 	LDFLAGS =
 endif
 
 # -D_BORLANDC_SOURCE is needed with gcc-ia16 to get pdckbd.c to work
-CFLAGS += -I$(PDCURSES_SRCDIR) -D_BORLANDC_SOURCE
+CC_CFLAGS += -I$(PDCURSES_SRCDIR) -D_BORLANDC_SOURCE $(CFLAGS)
 
 LINK		= $(CC)
 
@@ -64,20 +64,20 @@ $(DEMOS) : $(PDCURSES_CURSES_H) $(LIBCURSES)
 panel.o : $(PANEL_HEADER)
 
 $(LIBOBJS) : %.o: $(srcdir)/%.c
-	$(CC) -c $(CFLAGS) $<
+	$(CC) -c $(CC_CFLAGS) $<
 
 $(PDCOBJS) : %.o: $(osdir)/%.c
-	$(CC) -c $(CFLAGS) $<
+	$(CC) -c $(CC_CFLAGS) $<
 
 firework.exe ozdemo.exe rain.exe testcurs.exe worm.exe xmas.exe \
 ptest.exe: %.exe: $(demodir)/%.c
-	$(CC) $(CFLAGS) -o$@ $< $(LIBCURSES)
+	$(CC) $(CC_CFLAGS) -o$@ $< $(LIBCURSES)
 
 tuidemo.exe: tuidemo.o tui.o
 	$(LINK) $(LDFLAGS) -o$@ tuidemo.o tui.o $(LIBCURSES)
 
 tui.o: $(demodir)/tui.c $(demodir)/tui.h $(PDCURSES_CURSES_H)
-	$(CC) -c $(CFLAGS) -I$(demodir) -o$@ $<
+	$(CC) -c $(CC_CFLAGS) -I$(demodir) -o$@ $<
 
 tuidemo.o: $(demodir)/tuidemo.c $(PDCURSES_CURSES_H)
-	$(CC) -c $(CFLAGS) -I$(demodir) -o$@ $<
+	$(CC) -c $(CC_CFLAGS) -I$(demodir) -o$@ $<

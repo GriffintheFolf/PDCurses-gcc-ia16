@@ -12,6 +12,7 @@ Building
         Makefile     - DJGPP
         Makefile.bcc - Borland C++
         Makefile.wcc - Watcom
+        Makefile.gcc - gcc-ia16
 
 - For 16-bit compilers, you can change the memory MODEL as a command-
   line option. (Large model is the default, and recommended.) With
@@ -39,3 +40,5 @@ Acknowledgements
 Watcom C port was provided by Pieter Kunst <kunst@prl.philips.nl>
 
 DJGPP port was provided by David Nugent <davidn@csource.oz.au>
+
+gcc-ia16 port was provided by Griffin <griffin@folf.gay>

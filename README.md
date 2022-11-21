@@ -1,3 +1,13 @@
+# PDCurses-gcc-ia16
+
+This is a fork of PDCurses with changes made to support compiling using
+`gcc-ia16` targetting MS-DOS. Any and all modifications made are
+hereby released to the public domain, except where noted.
+
+The original PDCurses README follows:
+
+***
+
 PDCurses
 ========
 

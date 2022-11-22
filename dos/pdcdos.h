@@ -35,6 +35,9 @@
 #endif
 
 #include <dos.h>
+#if (defined(__GNUC__) && defined(__MSDOS__))
+# include <i86.h>
+#endif
 
 extern short pdc_curstoreal[16];
 extern int pdc_adapter;
@@ -59,7 +62,7 @@ extern unsigned pdc_video_ofs;
 #  if defined(__WATCOMC__) && defined(__FLAT__)
 #   define _FAR_POINTER(s,o) ((((int)(s)) << 4) + ((int)(o)))
 #  else
-#   define _FAR_POINTER(s,o) (((long)s << 16) | (long)o)
+#   define _FAR_POINTER(s,o) (((long)s << 16) | ((long)o))
 #  endif
 # endif
 # define _FP_SEGMENT(p)     (unsigned short)(((long)p) >> 4)

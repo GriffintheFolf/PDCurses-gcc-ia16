@@ -536,7 +536,7 @@ int PDC_scr_open(void)
         dosmemget((unsigned long)_FAR_POINTER(pdc_video_seg, pdc_video_ofs),
                   saved_lines * saved_cols * 2, saved_screen);
 #else
-# if SMALL || MEDIUM
+# if (SMALL || MEDIUM) && (!defined(__GNUC__) && !defined(__MSDOS__))
         segread(&segregs);
         ds = segregs.ds;
         movedata(pdc_video_seg, pdc_video_ofs, ds, (int)saved_screen,
